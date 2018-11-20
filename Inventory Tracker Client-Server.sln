@@ -3,12 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loaned PC Tracker Client", "Loaned PC Tracker Client\Loaned PC Tracker Client.csproj", "{3DB64964-BB31-4643-B178-D600F2483FF4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory Tracker Client", "Inventory Tracker Client\Inventory Tracker Client.csproj", "{3DB64964-BB31-4643-B178-D600F2483FF4}"
 	ProjectSection(ProjectDependencies) = postProject
 		{5A965BB7-2D4C-4993-A598-2E350A6D745F} = {5A965BB7-2D4C-4993-A598-2E350A6D745F}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loaned PC Tracker Server", "Loaned PC Tracker Server\Loaned PC Tracker Server.csproj", "{5A965BB7-2D4C-4993-A598-2E350A6D745F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory Tracker Server", "Inventory Tracker Server\Inventory Tracker Server.csproj", "{5A965BB7-2D4C-4993-A598-2E350A6D745F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
