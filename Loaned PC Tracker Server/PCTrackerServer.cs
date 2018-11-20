@@ -5,7 +5,6 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-//using Excel;
 using ExcelDataReader;
 using System.Data;
 using System.Net;
@@ -138,7 +137,7 @@ namespace Loaned_PC_Tracker_Server {
         private void FillSiteList(int sitesNum, DataTable dTable) {
             ProgressMax = sitesNum;
             string siteName;
-            for (int i = 1; i <= sitesNum; i++) {
+            for (int i = 0; i < sitesNum; i++) {
 				siteName = (stringCheckNull(dTable.Rows[i][0])).Split(' ')[0];
                 siteList.Add(new Site(siteName));
                 UpdateStatus("> " + siteName);
@@ -212,7 +211,7 @@ namespace Loaned_PC_Tracker_Server {
             Laptop newLaptop;
             Laptop prevLaptop = new Laptop();
 
-            for (int index = 2; index <= lastRow; index++) {
+            for (int index = 0; index < lastRow; index++) {
 				newLaptop = getNewLaptop(index, ref dTable);
                 //this verifies that the newly created laptop is not a copy of the previous one
                 if (newLaptop != prevLaptop) {
