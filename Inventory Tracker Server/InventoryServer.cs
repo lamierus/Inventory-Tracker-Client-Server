@@ -428,11 +428,11 @@ namespace Inventory_Tracker_Server {
             Site site = siteList.Find(s => s.Name == siteName);
             if (type == "Hotswaps") {
                 foreach (Laptop pc in site.Hotswaps) {
-                    dataStream.AddRange(pc.SerializeLaptop());
+                    dataStream.AddRange(pc.Serialize());
                 }
             } else {
                 foreach (Laptop pc in site.Loaners) {
-                    dataStream.AddRange(pc.SerializeLaptop());
+                    dataStream.AddRange(pc.Serialize());
                 }
             }
             UpdateStatus(">>> Sending " + type + " from " + siteName + " to " + client.UserName);
@@ -629,7 +629,7 @@ namespace Inventory_Tracker_Server {
         public void BroadcastUpdateToSite(Laptop updatedPC, Client client) {
             var serializedData = new List<byte>();
             serializedData.AddRange(BitConverter.GetBytes((int)DataIdentifier.Update));
-            serializedData.AddRange(updatedPC.SerializeLaptop());
+            serializedData.AddRange(updatedPC.Serialize());
             foreach (Client c in ClientList.FindAll(c => (c.Site == client.Site && c.Hotswaps == client.Hotswaps))) {
                 if (c != client) {
                     UpdateStatus(">>> Sending update broadcast to " + c.UserName);

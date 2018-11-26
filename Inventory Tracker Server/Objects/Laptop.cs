@@ -44,10 +44,10 @@ namespace Inventory_Tracker_Server {
         }
 
         public Laptop(byte[] dataStream) {
-            DeserializeLaptop(dataStream);
+            Deserialize(dataStream);
         }
 
-        public byte[] SerializeLaptop() {
+        public byte[] Serialize() {
             byte[] seperator = BitConverter.GetBytes(',');
             List<byte> serializedPC = new List<byte>();
             
@@ -107,7 +107,7 @@ namespace Inventory_Tracker_Server {
             return serializedPC.ToArray();
         }
 
-        private void DeserializeLaptop(byte[] serializedPC) {
+        private void Deserialize(byte[] serializedPC) {
             string dataString = Encoding.UTF8.GetString(serializedPC);
             string[] splitString = dataString.Split(Seperator, StringSplitOptions.RemoveEmptyEntries);
 
@@ -131,7 +131,7 @@ namespace Inventory_Tracker_Server {
             }
         }
 
-        public Laptop DeserializeLaptop(string serializedPC) {
+        public Laptop Deserialize(string serializedPC) {
             Laptop deserializedPC = new Laptop();
 
             string[] splitString = serializedPC.Split(Seperator, StringSplitOptions.RemoveEmptyEntries);
@@ -166,7 +166,7 @@ namespace Inventory_Tracker_Server {
             CheckedOut = changes.CheckedOut;
         }
 
-        // the logic required to be able to compare CSATs to each other
+        // the logic required to be able to compare Objects of the class to each other
         public override bool Equals(object obj) {
             if (obj == null) {
                 return false;

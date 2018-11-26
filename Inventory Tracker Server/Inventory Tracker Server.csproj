@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Objects\Client.cs" />
+    <Compile Include="Objects\InventoryItem.cs" />
     <Compile Include="Packets\DataIdentifierEnum.cs" />
     <Compile Include="Objects\Laptop.cs" />
     <Compile Include="LoadingProgressForm.cs">
