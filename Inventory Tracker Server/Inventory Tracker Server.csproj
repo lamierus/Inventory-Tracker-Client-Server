@@ -76,12 +76,13 @@
   <ItemGroup>
     <Compile Include="Objects\Client.cs" />
     <Compile Include="Objects\InventoryItem.cs" />
-    <Compile Include="Packets\DataIdentifierEnum.cs" />
     <Compile Include="Objects\Laptop.cs" />
-    <Compile Include="LoadingProgressForm.cs">
+    <Compile Include="Objects\Site.cs" />
+    <Compile Include="Packets\DataIdentifierEnum.cs" />
+    <Compile Include="Dialogs\LoadingProgressForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoadingProgressForm.Designer.cs">
+    <Compile Include="Dialogs\LoadingProgressForm.Designer.cs">
       <DependentUpon>LoadingProgressForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Packets\PCChange.cs" />
@@ -97,7 +98,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Objects\Site.cs" />
     <EmbeddedResource Include="InventoryServer.resx">
       <DependentUpon>InventoryServer.cs</DependentUpon>
       <SubType>Designer</SubType>

@@ -7,10 +7,11 @@ using System.Net;
 using System.Net.Sockets;
 using System.Collections.Generic;
 using System.Text;
+using Inventory_Tracker_Server;
 
 namespace Inventory_Tracker_Client {
     public partial class InventoryClient : Form {
-        private const string KeyLocation = "SOFTWARE\\PC Tracker";
+        private const string KeyLocation = "SOFTWARE\\Inventory Tracker";
         private Microsoft.Win32.RegistryKey ProgramKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(KeyLocation);
         private string Server = "MXL3090GHT-X7";
         private BindingList<Laptop> CurrentlyAvailable = new BindingList<Laptop>();
@@ -473,7 +474,7 @@ namespace Inventory_Tracker_Client {
             var stringStream = Encoding.UTF8.GetString(dataStream);
             var splitStream = stringStream.Split(seperator);
             for(int i = 1; i < splitStream.Length - 1; i++) {
-                AddLaptop(new Laptop().DeserializeLaptop(splitStream[i]));
+                AddLaptop(new Laptop().Deserialize(splitStream[i]));
             }
         }
 

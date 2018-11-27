@@ -122,25 +122,18 @@
     <Compile Include="Dialogs\ConnectionForm.Designer.cs">
       <DependentUpon>ConnectionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Packets\DataIdentifier.cs" />
-    <Compile Include="Packets\PCPacket.cs" />
     <Compile Include="InventoryClient.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="InventoryClient.Designer.cs">
       <DependentUpon>InventoryClient.cs</DependentUpon>
     </Compile>
-    <Compile Include="Packets\NamePacket.cs" />
-    <Compile Include="Objects\Laptop.cs" />
     <Compile Include="Dialogs\LoadingProgress.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogs\LoadingProgress.Designer.cs">
       <DependentUpon>LoadingProgress.cs</DependentUpon>
     </Compile>
-    <Compile Include="Packets\RequestPCPacket.cs" />
-    <Compile Include="Packets\Packet.cs" />
-    <Compile Include="Packets\PCChange.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Dialogs\Viewer.cs">
@@ -217,6 +210,13 @@
   <ItemGroup>
     <Content Include="chocobo.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Inventory Tracker Server\Inventory Tracker Server.csproj">
+      <Project>{5a965bb7-2d4c-4993-a598-2e350a6d745f}</Project>
+      <Name>Inventory Tracker Server</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -31,7 +31,7 @@ namespace Inventory_Tracker_Server {
         }
 
         public Laptop(int loanerNumber, string brand, string model, string serialNumber, string warranty,
-                      string username, string userSerialNumber, string ticketNumber, bool checkedOut = true) {
+                        string username, string userSerialNumber, string ticketNumber, bool checkedOut = true) {
             Number = loanerNumber;
             Serial = serialNumber;
             Brand = brand;
@@ -50,11 +50,11 @@ namespace Inventory_Tracker_Server {
         public byte[] Serialize() {
             byte[] seperator = BitConverter.GetBytes(',');
             List<byte> serializedPC = new List<byte>();
-            
+
             serializedPC.AddRange(Encoding.UTF8.GetBytes(Number.ToString()));
 
             serializedPC.AddRange(seperator);
-            
+
             // Add the serial number
             if (Serial != null)
                 serializedPC.AddRange(Encoding.UTF8.GetBytes(Serial));
@@ -99,7 +99,7 @@ namespace Inventory_Tracker_Server {
 
             // Add the Checked in or out flag
             serializedPC.AddRange(Encoding.UTF8.GetBytes(CheckedOut.ToString()));
-            
+
             // Add the seperator to signify the end of the serialized item.
             serializedPC.AddRange(BitConverter.GetBytes(';'));
 

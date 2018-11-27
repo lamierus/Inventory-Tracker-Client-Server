@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Inventory_Tracker_Server;
 
 namespace Inventory_Tracker_Client {
     public partial class Viewer : Form {

@@ -2,8 +2,8 @@
 using System.Text;
 using System.Collections.Generic;
 
-namespace Loaned_PC_Tracker_Server.Objects {
-    class InventoryItem : IEquatable<InventoryItem> {
+namespace Inventory_Tracker_Server {
+    public class InventoryItem : IEquatable<InventoryItem> {
 
         public string Brand { get; set; }
         public string Description { get; set; }
@@ -19,12 +19,12 @@ namespace Loaned_PC_Tracker_Server.Objects {
 
         readonly char[] Seperator = new char[] { ',' };
         readonly char[] TrimChar = new char[] { '\0' };
-        
+
         public InventoryItem() {
 
         }
 
-        public InventoryItem (string brand, string description, string partNum, string oldPartNum, int inStock, int toOrder,
+        public InventoryItem(string brand, string description, string partNum, string oldPartNum, int inStock, int toOrder,
                                 int ordered, Double price) {
             Brand = brand;
             Description = description;
@@ -36,7 +36,7 @@ namespace Loaned_PC_Tracker_Server.Objects {
             Price = price;
         }
 
-        
+
         public InventoryItem(byte[] dataStream) {
             Deserialize(dataStream);
         }
@@ -80,7 +80,7 @@ namespace Loaned_PC_Tracker_Server.Objects {
             // Add the Price
             serializedItem.AddRange(Encoding.UTF8.GetBytes(Price.ToString()));
             serializedItem.AddRange(seperator);
-            
+
             // Add the seperator to signify the end of the serialized item.
             serializedItem.AddRange(BitConverter.GetBytes(';'));
 
@@ -112,7 +112,7 @@ namespace Loaned_PC_Tracker_Server.Objects {
                 Price = parsedDub;
             }
         }
-        
+
         public InventoryItem Deserialize(string serializedItem) {
             InventoryItem deserializedItem = new InventoryItem();
 
@@ -138,7 +138,7 @@ namespace Loaned_PC_Tracker_Server.Objects {
             if (double.TryParse(splitString[7].Trim(TrimChar), out parsedDub)) {
                 deserializedItem.Price = parsedDub;
             }
-            
+
 
             return deserializedItem;
         }
