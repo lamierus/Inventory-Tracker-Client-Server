@@ -13,7 +13,7 @@ namespace Inventory_Tracker_Client {
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new InventoryClient());
+            Application.Run(new InventoryUI());
         }
     }
 }

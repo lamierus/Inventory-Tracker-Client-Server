@@ -10,7 +10,7 @@ using System.Text;
 using Inventory_Tracker_Server;
 
 namespace Inventory_Tracker_Client {
-    public partial class InventoryUI : Form {
+    public partial class ViewEditPcs : Form {
         private const string KeyLocation = "SOFTWARE\\Inventory Tracker";
         private Microsoft.Win32.RegistryKey ProgramKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(KeyLocation);
         private string Server = "MXL3090GHT-X7";
@@ -27,7 +27,7 @@ namespace Inventory_Tracker_Client {
         private delegate void StringParameterDelegate(string value);
         private delegate void LaptopParameterDelegate(Laptop laptop);
 
-        public InventoryUI() {
+        public ViewEditPcs() {
             InitializeComponent();
 
             cbSiteChooser.DataSource = siteList;
@@ -542,10 +542,6 @@ namespace Inventory_Tracker_Client {
         /// <param name="e"></param>
         private void bgwAwaitBroadcasts_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
             UpdateStatus("Disconnected from server!");
-        }
-
-        private void InventoryUI_Load(object sender, EventArgs e) {
-
         }
     }
 }
