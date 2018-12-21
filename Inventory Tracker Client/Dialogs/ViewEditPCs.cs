@@ -30,9 +30,7 @@ namespace Inventory_Tracker_Client {
         public ViewEditPcs() {
             InitializeComponent();
 
-            cbSiteChooser.DataSource = siteList;
             dgvAvailable.DataSource = CurrentlyAvailable;
-            dgvCheckedOut.DataSource = CheckedOut;
         }
 
         /// <summary>
@@ -50,7 +48,7 @@ namespace Inventory_Tracker_Client {
                         Server = connectTo.ReturnAddress;
                         numRetries = connectTo.ReturnRetries;
                     } else {
-                        UpdateStatus("Connection Failed! Please restart the application!");
+                        //UpdateStatus("Connection Failed! Please restart the application!");
                         return;
                     }
                 }
@@ -64,11 +62,11 @@ namespace Inventory_Tracker_Client {
         private void ConnectToServer(int retries) {
             //this loop allows for multiple attempts to connect to the server before timing out
             for (int i = 0; i < retries; i++) {
-                UpdateStatus(">>Attempting to connect...");
+                //UpdateStatus(">>Attempting to connect...");
                 try {
                     ClientSocket.Connect(Server, 8888);
                 } catch (Exception ex) {
-                    UpdateStatus(ex.Message);
+                    //UpdateStatus(ex.Message);
                 }
 
                 //once connected, the client sends a packet to the server to agknowledge logging in.
@@ -77,20 +75,20 @@ namespace Inventory_Tracker_Client {
                     NamePacket handshake = new NamePacket(Environment.UserName);
                     loginStream.Write(handshake.CreateDataStream(), 0, handshake.PacketLength);
                     loginStream.Flush();
-                    UpdateStatus("Server Connected ... " + Server);
+                    //UpdateStatus("Server Connected ... " + Server);
                     //bwBroadcastStream.RunWorkerAsync();
                     break;
                 }
-                UpdateStatus(">> Waiting 3 Seconds before trying again.");
+                //UpdateStatus(">> Waiting 3 Seconds before trying again.");
                 DateTime start = DateTime.Now;
                 while (DateTime.Now.Subtract(start).Seconds < 3) { }
             }
             if (!ClientSocket.Connected) {
-                UpdateStatus("Connection Failed!!");
+                //UpdateStatus("Connection Failed!!");
             }
         }
 
-        public void UpdateStatus(string message) {
+        /*public void UpdateStatus(string message) {
             if (InvokeRequired) {
                 // We're not in the UI thread, so we need to call BeginInvoke
                 BeginInvoke(new StringParameterDelegate(UpdateStatus), new object[] { message });
@@ -100,14 +98,14 @@ namespace Inventory_Tracker_Client {
             tbConnectionStatus.AppendText(message);
             tbConnectionStatus.AppendText(Environment.NewLine);
             
-        }
+        }*/
 
         /// <summary>
         ///     
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void frmTracker_Resize(object sender, EventArgs e) {
+        /*private void frmTracker_Resize(object sender, EventArgs e) {
             Form sent = sender as Form;
             if (sent.WindowState == FormWindowState.Maximized) {
                 dgvAvailable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -116,7 +114,7 @@ namespace Inventory_Tracker_Client {
                 dgvAvailable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
                 dgvCheckedOut.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             }
-        }
+        }*/
         
         /// <summary>
         ///     
@@ -133,7 +131,7 @@ namespace Inventory_Tracker_Client {
                     siteList.Add(s);
                 }
             } catch (Exception ex) {
-                UpdateStatus(ex.Message);
+                //UpdateStatus(ex.Message);
             }
         }
 
@@ -159,9 +157,9 @@ namespace Inventory_Tracker_Client {
         private void bgwLoadSites_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
             siteList.ResetBindings();
 
-            int index = cbSiteChooser.FindString(GetDefaultSite(ProgramKey));
+            /*int index = cbSiteChooser.FindString(GetDefaultSite(ProgramKey));
             cbSiteChooser.SelectedIndex = index;
-            btnSetDefaultSite.Enabled = false;
+            btnSetDefaultSite.Enabled = false;*/
 
             ProgressBarForm.Close();
             bgwAwaitBroadcasts.RunWorkerAsync();
@@ -172,7 +170,7 @@ namespace Inventory_Tracker_Client {
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cbSiteChooser_SelectedIndexChanged(object sender, EventArgs e) {
+        /*private void cbSiteChooser_SelectedIndexChanged(object sender, EventArgs e) {
             if (cbSiteChooser.SelectedIndex != cbSiteChooser.FindString(GetDefaultSite(ProgramKey))) {
                 rbHidden.Checked = true;
                 btnSetDefaultSite.Enabled = true;
@@ -181,36 +179,36 @@ namespace Inventory_Tracker_Client {
             } else {
                 btnSetDefaultSite.Enabled = false;
             }
-        }
+        }*/
 
         /// <summary>
         ///     
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnSetDefaultSite_Click(object sender, EventArgs e) {
+        /*private void btnSetDefaultSite_Click(object sender, EventArgs e) {
             SetDefaultSite(ProgramKey);
             btnSetDefaultSite.Enabled = false;
-        }
+        }*/
 
         /// <summary>
         ///     
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        private string GetDefaultSite(Microsoft.Win32.RegistryKey key) {
+        /*private string GetDefaultSite(Microsoft.Win32.RegistryKey key) {
             if (key == null) {
                 SetDefaultSite(key);
                 return (string)cbSiteChooser.SelectedItem;
             }
             return (string)key.GetValue("Default Site");
-        }
+        }*/
 
         /// <summary>
         ///     
         /// </summary>
         /// <param name="key"></param>
-        private void SetDefaultSite(Microsoft.Win32.RegistryKey key) {
+        /*private void SetDefaultSite(Microsoft.Win32.RegistryKey key) {
             string siteName = (string)cbSiteChooser.SelectedItem;
 
             if (key == null) {
@@ -222,14 +220,14 @@ namespace Inventory_Tracker_Client {
                 key.SetValue("Default Site", siteName);
             }
             key.Close();
-        }
+        }*/
 
         /// <summary>
         ///     
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void rbLoaner_CheckedChanged(object sender, EventArgs e) {
+        /*private void rbLoaner_CheckedChanged(object sender, EventArgs e) {
             RadioButton sent = sender as RadioButton;
             if (sent.Checked) {
                 ClearPCLists();
@@ -238,14 +236,14 @@ namespace Inventory_Tracker_Client {
                 dgvCheckedOut.Columns[0].Visible = true;
                 AccessLoanedPCData((string)cbSiteChooser.SelectedItem, false);
             }
-        }
+        }*/
 
         /// <summary>
         ///     
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void rbHotSwap_CheckedChanged(object sender, EventArgs e) {
+        /*private void rbHotSwap_CheckedChanged(object sender, EventArgs e) {
             RadioButton sent = sender as RadioButton;
             if (sent.Checked) {
                 ClearPCLists();
@@ -254,7 +252,7 @@ namespace Inventory_Tracker_Client {
                 dgvCheckedOut.Columns[0].Visible = false;
                 AccessLoanedPCData((string)cbSiteChooser.SelectedItem, true);
             }
-        }
+        }*/
 
         private void ClearPCLists() {
             CurrentlyAvailable.Clear();
@@ -284,11 +282,11 @@ namespace Inventory_Tracker_Client {
 
             RequestPCPacket requestPCs = new RequestPCPacket(siteName, type);
             try {
-                UpdateStatus("Requesting " + type + " for " + requestPCs.SiteName);
+                //UpdateStatus("Requesting " + type + " for " + requestPCs.SiteName);
                 ClientSocket.GetStream().Write(requestPCs.CreateDataStream(), 0, requestPCs.PacketLength);
                 ClientSocket.GetStream().Flush();
             } catch(Exception ex) {
-                UpdateStatus(ex.Message);
+                //UpdateStatus(ex.Message);
             }
             ProgressBarForm = new LoadingProgress("Loading " + type + " List");
             ProgressBarForm.ShowDialog();
@@ -309,17 +307,17 @@ namespace Inventory_Tracker_Client {
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvCheckedOut_CellClick(object sender, DataGridViewCellEventArgs e) {
+        /*private void dgvCheckedOut_CellClick(object sender, DataGridViewCellEventArgs e) {
             Viewer viewItem = new Viewer((Laptop)dgvCheckedOut.SelectedRows[0].DataBoundItem);
             viewItem.ShowDialog();
-        }
+        }*/
 
         /// <summary>
         ///     
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnCheckOut_Click(object sender, EventArgs e) {
+        /*private void btnCheckOut_Click(object sender, EventArgs e) {
             if (CurrentlyAvailable.Count > 0) {
                 Laptop checkOutPC = (Laptop)dgvAvailable.SelectedRows[0].DataBoundItem;
                 if (checkOutPC != null) {
@@ -341,14 +339,14 @@ namespace Inventory_Tracker_Client {
                     }
                 }
             }
-        }
+        }*/
 
         /// <summary>
         ///     
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnCheckIn_Click(object sender, EventArgs e) {
+        /*private void btnCheckIn_Click(object sender, EventArgs e) {
             if (CheckedOut.Count > 0) {
                 Laptop checkInPC = (Laptop)dgvCheckedOut.SelectedRows[0].DataBoundItem;
                 if (checkInPC != null) {
@@ -370,14 +368,14 @@ namespace Inventory_Tracker_Client {
                     }
                 }
             }
-        }
+        }*/
 
         /// <summary>
         ///     
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnEditPC_Click(object sender, EventArgs e) {
+        /*private void btnEditPC_Click(object sender, EventArgs e) {
             if (CurrentlyAvailable.Count > 0) {
                 Laptop editedPC = (Laptop)dgvAvailable.SelectedRows[0].DataBoundItem;
                 using (var form = new AddEditRemove(editedPC, false, rbHotSwaps.Checked)) {
@@ -389,28 +387,28 @@ namespace Inventory_Tracker_Client {
                     }
                 }
             }
-        }
+        }*/
 
         /// <summary>
         ///     
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnAddNew_Click(object sender, EventArgs e) {
+        /*private void btnAddNew_Click(object sender, EventArgs e) {
             using (var form = new AddEditRemove(rbHotSwaps.Checked)) {
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK) {
                     CurrentlyAvailable.Add(form.ReturnPC);
                 }
             }
-        }
+        }*/
 
         /// <summary>
         ///     
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnRemoveOld_Click(object sender, EventArgs e) {
+        /*private void btnRemoveOld_Click(object sender, EventArgs e) {
             if (CurrentlyAvailable.Count > 0) {
                 Laptop PCtoRemove = (Laptop)dgvAvailable.SelectedRows[0].DataBoundItem;
                 using (var form = new AddEditRemove(PCtoRemove, true, rbHotSwaps.Checked)) {
@@ -420,7 +418,8 @@ namespace Inventory_Tracker_Client {
                     }
                 }
             }
-        }
+        }*/
+
         /// <summary>
         ///     
         /// </summary>
@@ -446,7 +445,7 @@ namespace Inventory_Tracker_Client {
                     if (streamIdentifier == DataIdentifier.Broadcast) {
                         List<string> broadcast = DeserializeStringStream(inStream);
                         foreach (string s in broadcast) {
-                            UpdateStatus(s);
+                            //UpdateStatus(s);
                         }
                     } else if (streamIdentifier == DataIdentifier.Laptop) {
                         SplitAndAddPCStream(inStream);
@@ -458,7 +457,7 @@ namespace Inventory_Tracker_Client {
                     } else if (streamIdentifier == DataIdentifier.Null) {
                     }
                 } catch (Exception ex) {
-                    UpdateStatus(ex.Message);
+                    //UpdateStatus(ex.Message);
                     //TODO: add a prompt for the user to reconnect to the server.
                     break;
                 }
@@ -541,7 +540,7 @@ namespace Inventory_Tracker_Client {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void bgwAwaitBroadcasts_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
-            UpdateStatus("Disconnected from server!");
+            //UpdateStatus("Disconnected from server!");
         }
     }
 }

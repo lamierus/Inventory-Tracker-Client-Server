@@ -65,7 +65,7 @@
             this.btnCheckOut.TabIndex = 9;
             this.btnCheckOut.Text = "Check Out";
             this.btnCheckOut.UseVisualStyleBackColor = true;
-            this.btnCheckOut.Click += new System.EventHandler(this.btnCheckOut_Click);
+            //this.btnCheckOut.Click += new System.EventHandler(this.btnCheckOut_Click);
             // 
             // btnCheckIn
             // 
@@ -77,7 +77,7 @@
             this.btnCheckIn.TabIndex = 10;
             this.btnCheckIn.Text = "Check In";
             this.btnCheckIn.UseVisualStyleBackColor = true;
-            this.btnCheckIn.Click += new System.EventHandler(this.btnCheckIn_Click);
+            //this.btnCheckIn.Click += new System.EventHandler(this.btnCheckIn_Click);
             // 
             // btnAddNew
             // 
@@ -89,7 +89,7 @@
             this.btnAddNew.TabIndex = 11;
             this.btnAddNew.Text = "Add New PC";
             this.btnAddNew.UseVisualStyleBackColor = true;
-            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
+            //this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
             // btnRemoveOld
             // 
@@ -101,7 +101,7 @@
             this.btnRemoveOld.TabIndex = 13;
             this.btnRemoveOld.Text = "Remove Old PC";
             this.btnRemoveOld.UseVisualStyleBackColor = true;
-            this.btnRemoveOld.Click += new System.EventHandler(this.btnRemoveOld_Click);
+            //this.btnRemoveOld.Click += new System.EventHandler(this.btnRemoveOld_Click);
             // 
             // btnEditPC
             // 
@@ -113,7 +113,7 @@
             this.btnEditPC.TabIndex = 14;
             this.btnEditPC.Text = "Edit PC Info";
             this.btnEditPC.UseVisualStyleBackColor = true;
-            this.btnEditPC.Click += new System.EventHandler(this.btnEditPC_Click);
+            //this.btnEditPC.Click += new System.EventHandler(this.btnEditPC_Click);
             // 
             // btnSaveChanges
             // 
@@ -175,7 +175,7 @@
             this.Text = "Loaned PC Tracker";
             this.Activated += new System.EventHandler(this.frmTracker_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmPCTracker_Closing);
-            this.Resize += new System.EventHandler(this.frmTracker_Resize);
+            //this.Resize += new System.EventHandler(this.frmTracker_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAvailable)).EndInit();
             this.ResumeLayout(false);
 
