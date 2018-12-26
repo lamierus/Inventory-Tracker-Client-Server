@@ -11,9 +11,6 @@ using Inventory_Tracker_Server;
 
 namespace Inventory_Tracker_Client {
     public partial class ViewEditPcs : Form {
-        private const string KeyLocation = "SOFTWARE\\Inventory Tracker";
-        private Microsoft.Win32.RegistryKey ProgramKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(KeyLocation);
-        private string Server = "MXL3090GHT-X7";
         private BindingList<Laptop> CurrentlyAvailable = new BindingList<Laptop>();
         private BindingList<Laptop> CheckedOut = new BindingList<Laptop>();
         private BindingList<string> siteList = new BindingList<string>();
@@ -41,7 +38,7 @@ namespace Inventory_Tracker_Client {
         private void frmTracker_Activated(object sender, EventArgs e) {
             if (!WindowLoaded) {
                 WindowLoaded = true;
-                int numRetries = 1;
+                /*int numRetries = 1;
                 using (var connectTo = new ConnectionForm(Server)) {
                     var result = connectTo.ShowDialog();
                     if (result == DialogResult.OK) {
@@ -55,7 +52,7 @@ namespace Inventory_Tracker_Client {
                 ConnectToServer(numRetries);
                 bgwLoadSites.RunWorkerAsync();
                 ProgressBarForm = new LoadingProgress("Receiving Sites List");
-                ProgressBarForm.ShowDialog();
+                ProgressBarForm.ShowDialog();*/
             }
         }
 
@@ -63,7 +60,7 @@ namespace Inventory_Tracker_Client {
             //this loop allows for multiple attempts to connect to the server before timing out
             for (int i = 0; i < retries; i++) {
                 //UpdateStatus(">>Attempting to connect...");
-                try {
+                /*try {
                     ClientSocket.Connect(Server, 8888);
                 } catch (Exception ex) {
                     //UpdateStatus(ex.Message);
@@ -81,7 +78,7 @@ namespace Inventory_Tracker_Client {
                 }
                 //UpdateStatus(">> Waiting 3 Seconds before trying again.");
                 DateTime start = DateTime.Now;
-                while (DateTime.Now.Subtract(start).Seconds < 3) { }
+                while (DateTime.Now.Subtract(start).Seconds < 3) { }*/
             }
             if (!ClientSocket.Connected) {
                 //UpdateStatus("Connection Failed!!");
@@ -130,7 +127,7 @@ namespace Inventory_Tracker_Client {
                 foreach(string s in sites) {
                     siteList.Add(s);
                 }
-            } catch (Exception ex) {
+            } catch /*(Exception ex)*/ {
                 //UpdateStatus(ex.Message);
             }
         }
@@ -285,7 +282,7 @@ namespace Inventory_Tracker_Client {
                 //UpdateStatus("Requesting " + type + " for " + requestPCs.SiteName);
                 ClientSocket.GetStream().Write(requestPCs.CreateDataStream(), 0, requestPCs.PacketLength);
                 ClientSocket.GetStream().Flush();
-            } catch(Exception ex) {
+            } catch /*(Exception ex)*/ {
                 //UpdateStatus(ex.Message);
             }
             ProgressBarForm = new LoadingProgress("Loading " + type + " List");
@@ -456,7 +453,7 @@ namespace Inventory_Tracker_Client {
                         bgwAwaitBroadcasts.ReportProgress(0);
                     } else if (streamIdentifier == DataIdentifier.Null) {
                     }
-                } catch (Exception ex) {
+                } catch /*(Exception ex)*/ {
                     //UpdateStatus(ex.Message);
                     //TODO: add a prompt for the user to reconnect to the server.
                     break;

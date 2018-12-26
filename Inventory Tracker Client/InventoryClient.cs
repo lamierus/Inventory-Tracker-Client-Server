@@ -13,7 +13,10 @@ namespace Inventory_Tracker_Client {
     public partial class InventoryUI : Form {
         private const string KeyLocation = "SOFTWARE\\Inventory Tracker";
         private Microsoft.Win32.RegistryKey ProgramKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(KeyLocation);
-        private string Server = "MXL3090GHT-X7";
+        private string Server = "192.168.50.10";
+        private string Login = "InventoryTesting";
+        private string Password = "testing123";
+
         private BindingList<Laptop> CurrentlyAvailable = new BindingList<Laptop>();
         private BindingList<Laptop> CheckedOut = new BindingList<Laptop>();
         private BindingList<string> siteList = new BindingList<string>();
@@ -31,8 +34,6 @@ namespace Inventory_Tracker_Client {
             InitializeComponent();
 
             cbSiteChooser.DataSource = siteList;
-            dgvAvailable.DataSource = CurrentlyAvailable;
-            dgvCheckedOut.DataSource = CheckedOut;
         }
 
         /// <summary>
@@ -110,11 +111,11 @@ namespace Inventory_Tracker_Client {
         private void frmTracker_Resize(object sender, EventArgs e) {
             Form sent = sender as Form;
             if (sent.WindowState == FormWindowState.Maximized) {
-                dgvAvailable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                dgvCheckedOut.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                //dgvAvailable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                //dgvCheckedOut.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             } else {
-                dgvAvailable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-                dgvCheckedOut.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+                //dgvAvailable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+                //dgvCheckedOut.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             }
         }
         
@@ -234,8 +235,8 @@ namespace Inventory_Tracker_Client {
             if (sent.Checked) {
                 ClearPCLists();
                 EnableDisableButtons(true);
-                dgvAvailable.Columns[0].Visible = true;
-                dgvCheckedOut.Columns[0].Visible = true;
+                //dgvAvailable.Columns[0].Visible = true;
+                //dgvCheckedOut.Columns[0].Visible = true;
                 AccessLoanedPCData((string)cbSiteChooser.SelectedItem, false);
             }
         }
@@ -250,8 +251,8 @@ namespace Inventory_Tracker_Client {
             if (sent.Checked) {
                 ClearPCLists();
                 EnableDisableButtons(true);
-                dgvAvailable.Columns[0].Visible = false;
-                dgvCheckedOut.Columns[0].Visible = false;
+                //dgvAvailable.Columns[0].Visible = false;
+                //dgvCheckedOut.Columns[0].Visible = false;
                 AccessLoanedPCData((string)cbSiteChooser.SelectedItem, true);
             }
         }
@@ -262,11 +263,11 @@ namespace Inventory_Tracker_Client {
         }
 
         private void EnableDisableButtons(bool disposition) {
-            btnAddNew.Enabled = disposition;
+            /*btnAddNew.Enabled = disposition;
             btnCheckIn.Enabled = disposition;
             btnCheckOut.Enabled = disposition;
             btnEditPC.Enabled = disposition;
-            btnRemoveOld.Enabled = disposition;
+            btnRemoveOld.Enabled = disposition;*/
         }
 
         /// <summary>
@@ -300,8 +301,8 @@ namespace Inventory_Tracker_Client {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void dgvAvailable_CellClick(object sender, DataGridViewCellEventArgs e) {
-            Viewer viewItem = new Viewer((Laptop)dgvAvailable.SelectedRows[0].DataBoundItem);
-            viewItem.ShowDialog();
+            //Viewer viewItem = new Viewer((Laptop)dgvAvailable.SelectedRows[0].DataBoundItem);
+            //viewItem.ShowDialog();
         }
 
         /// <summary>
@@ -310,8 +311,8 @@ namespace Inventory_Tracker_Client {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void dgvCheckedOut_CellClick(object sender, DataGridViewCellEventArgs e) {
-            Viewer viewItem = new Viewer((Laptop)dgvCheckedOut.SelectedRows[0].DataBoundItem);
-            viewItem.ShowDialog();
+            //Viewer viewItem = new Viewer((Laptop)dgvCheckedOut.SelectedRows[0].DataBoundItem);
+            //viewItem.ShowDialog();
         }
 
         /// <summary>
@@ -321,7 +322,7 @@ namespace Inventory_Tracker_Client {
         /// <param name="e"></param>
         private void btnCheckOut_Click(object sender, EventArgs e) {
             if (CurrentlyAvailable.Count > 0) {
-                Laptop checkOutPC = (Laptop)dgvAvailable.SelectedRows[0].DataBoundItem;
+                /*Laptop checkOutPC = (Laptop)dgvAvailable.SelectedRows[0].DataBoundItem;
                 if (checkOutPC != null) {
                     using (var form = new CheckOutOrIn(checkOutPC, rbHotSwaps.Checked)) {
                         var result = form.ShowDialog();
@@ -339,7 +340,7 @@ namespace Inventory_Tracker_Client {
                             }
                         }
                     }
-                }
+                }*/
             }
         }
 
@@ -350,7 +351,7 @@ namespace Inventory_Tracker_Client {
         /// <param name="e"></param>
         private void btnCheckIn_Click(object sender, EventArgs e) {
             if (CheckedOut.Count > 0) {
-                Laptop checkInPC = (Laptop)dgvCheckedOut.SelectedRows[0].DataBoundItem;
+                /*Laptop checkInPC = (Laptop)dgvCheckedOut.SelectedRows[0].DataBoundItem;
                 if (checkInPC != null) {
                     using (var form = new CheckOutOrIn(checkInPC, rbHotSwaps.Checked, true)) {
                         var result = form.ShowDialog();
@@ -368,7 +369,7 @@ namespace Inventory_Tracker_Client {
                             }
                         }
                     }
-                }
+                }*/
             }
         }
 
@@ -379,7 +380,7 @@ namespace Inventory_Tracker_Client {
         /// <param name="e"></param>
         private void btnEditPC_Click(object sender, EventArgs e) {
             if (CurrentlyAvailable.Count > 0) {
-                Laptop editedPC = (Laptop)dgvAvailable.SelectedRows[0].DataBoundItem;
+                /*Laptop editedPC = (Laptop)dgvAvailable.SelectedRows[0].DataBoundItem;
                 using (var form = new AddEditRemove(editedPC, false, rbHotSwaps.Checked)) {
                     var result = form.ShowDialog();
                     if (result == DialogResult.OK) {
@@ -387,7 +388,7 @@ namespace Inventory_Tracker_Client {
                         editedPC = form.ReturnPC;
                         CurrentlyAvailable.Add(editedPC);
                     }
-                }
+                }*/
             }
         }
 
@@ -412,13 +413,13 @@ namespace Inventory_Tracker_Client {
         /// <param name="e"></param>
         private void btnRemoveOld_Click(object sender, EventArgs e) {
             if (CurrentlyAvailable.Count > 0) {
-                Laptop PCtoRemove = (Laptop)dgvAvailable.SelectedRows[0].DataBoundItem;
+                /*Laptop PCtoRemove = (Laptop)dgvAvailable.SelectedRows[0].DataBoundItem;
                 using (var form = new AddEditRemove(PCtoRemove, true, rbHotSwaps.Checked)) {
                     var result = form.ShowDialog();
                     if (result == DialogResult.OK) {
                         CurrentlyAvailable.Remove(PCtoRemove);
                     }
-                }
+                }*/
             }
         }
         /// <summary>
